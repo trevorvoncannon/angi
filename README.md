@@ -12,7 +12,7 @@
 ## What it is and how it works
 
 <p align="center">
-  ![alt text](https://github.com/trevorvoncannon/angi/blob/main/res/angi.jpg?raw=true)
+  <img src="https://github.com/trevorvoncannon/angi/blob/main/res/angi.jpg?raw=true">
 </p>
 
 API Requester is a simple python code that queries a public API endpoint and stores the response data in JSON format in the /api-data directory. This directory is mounted to a persistent volume `api-data-pv` in your Minikube Kubernetes cluster. The API Requester code runs in a k8s pod that is controlled by a k8s Cronjob, which runs on a configured schedule.
