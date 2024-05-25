@@ -70,7 +70,7 @@ job.batch/api-requester-job-28611160   1/1           17s        59s
 ```
 #### Data Validation
 
-Remember the `pv-inspector` pod I mentioned earlier? This is where it comes into play. Run the following command to exec into the inspector pod and confirm data is being extracted from the API and stored on the volume.
+Remember the `pv-inspector` pod I mentioned earlier? This is where it comes into play. Run the following command to exec into the inspector container and confirm data is being extracted from the API and stored on the volume.
 
 ```bash
 kubectl exec -it pvc-inspector -n angi -- ls -l api-data
@@ -91,6 +91,18 @@ total 972
 -rw-r--r--    1 root     root         33550 May 25 20:04 api-data-20240525-200409.json
 ```
 ℹ️ **Notice that the files created by the query are timestamped with the date and time (YYYYMMDD-HHMMSS)**
+
+To view the data contained therein, you can either create a shell into the inspector container with 
+```
+kubectl exec -it pvc-inspector -n angi -- sh
+```
+and cat the files from inside the container
+
+or you can cat the files with
+
+```
+kubectl exec -it pvc-inspector -n angi -- cat api-data/<filename>
+```
 
 🥳 That's it! All there is to it!
 
