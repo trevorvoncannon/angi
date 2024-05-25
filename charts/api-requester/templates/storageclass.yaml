@@ -3,6 +3,6 @@ kind: StorageClass
 metadata:
   name: minikube-sc
 provisioner: {{ .Values.storageClass.provisioner }} #This provisioner will only work with minikube. If you are using another local k8s solution you will need to change this
-reclaimPolicy: Retain 
+reclaimPolicy: Delete
 allowVolumeExpansion: true
 volumeBindingMode: Immediate
