@@ -7,6 +7,7 @@
 - Internet connection
 - Container or virtual machine manager, such as: Docker, QEMU, Hyperkit, Hyper-V, KVM, Parallels, Podman, VirtualBox, or VMware Fusion/Workstation
 - Minikube: Installed via https://minikube.sigs.k8s.io/docs/start/ depending on your OS and Arch
+- Helm 3 - https://helm.sh/docs/intro/install/
 
 ## What it is and how it works
 
@@ -16,3 +17,30 @@ API Requester is a simple python code that queries a public API endpoint and sto
 
 As the API Requester job is relatively quick, the container running the code generally does not stay in a Running state for too long. To view the data on the persistent volume, I have provided a `pv-inspector` pod that also mounts the volume and allows you to view the JSON files created by the jobs.
 
+## How to deploy the API Requester
+The requester is packaged in a Helm chart and is therefore deployed using the helm cli, so make sure you have Helm 3 installed. 
+
+The Helm chart is located at https://github.com/trevorvoncannon/angi/tree/main/charts/api-requester - make sure to review the README.md for configuration options in the values file 
+
+:information_source: **This is how you can configure the requester's schedule**
+
+### Helm Install Command
+
+:warning: **Run this from the charts/api-requester directory**
+```bash
+helm install -f values.yaml api-requester . --namespace angi --create-namespace
+```
+After running this command, you should see this output
+
+```
+NAME: api-requester
+LAST DEPLOYED: <date>
+NAMESPACE: angi
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+```
+
+This means your release was successfully deployed!
+
+### Validation
