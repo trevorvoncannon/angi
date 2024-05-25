@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: apiRequesterJob
+  name: api-requester-job
 spec:
   schedule: "* * * * *"
   jobTemplate:
@@ -10,13 +10,11 @@ spec:
         spec:
           containers:
           - name: api-requester
-            image: api-requester:latest
-            command: ["/bin/bash"]
-            args: ["-c", "python api-requester.py"]
-            imagePullPolicy: Never # This is only for the local implementation. You will need to push the image to a repo and pull it down by changing this to Always or IfNotPresent
-          volumeMounts:
+            image: tfvoncan/api_requester:latest
+            imagePullPolicy: Always
+            volumeMounts:
             - name: api-data
-              mountPath: /data
+              mountPath: /api-data
           volumes:
             - name: api-data
               persistentVolumeClaim:
