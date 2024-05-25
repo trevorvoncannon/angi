@@ -1,1 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: api-data-pvc
+  labels:
+    app: {{ .Values.global.labels.app }}
+    env: {{ .Values.global.labels.env }}
+spec:
+  storageClassName: minikube-sc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.volume.requests.storage }}
 

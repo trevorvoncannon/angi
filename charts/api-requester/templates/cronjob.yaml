@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: api-requester-job
+  labels:
+    app: {{ .Values.global.labels.app }}
+    env: {{ .Values.global.labels.env }}
+spec:
+  schedule: '{{ .Values.cronJob.schedule }}'
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: {{ .Values.cronJob.ttlSecondsAfterFinished }}
+      template:
+        metadata:
+          labels:
+            app: {{ .Values.global.labels.app }}
+            env: {{ .Values.global.labels.env }}
+        spec:
+          containers:
+          - name: api-requester
+            image: tfvoncan/api_requester:latest
+            imagePullPolicy: Always
+            env:
+            - name: API_URL
+              value: "{{ .Values.cronJob.env.apiURL }}"
+            volumeMounts:
+            - name: api-data
+              mountPath: /api-data
+          volumes:
+            - name: api-data
+              persistentVolumeClaim:
+                claimName: api-data-pvc
+          restartPolicy: OnFailure
