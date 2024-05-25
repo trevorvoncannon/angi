@@ -18,7 +18,10 @@ API Requester is a simple python code that queries a public API endpoint and sto
 As the API Requester job is relatively quick, the container running the code generally does not stay in a Running state for too long. To view the data on the persistent volume, I have provided a `pv-inspector` pod that also mounts the volume and allows you to view the JSON files created by the jobs.
 
 ## How to deploy the API Requester
-The requester is packaged in a Helm chart and is therefore deployed using the helm cli, so make sure you have Helm 3 installed. 
+
+Start by downloading the repo tarball/zip file and extracting it on your local machine.
+
+The requester is packaged in a Helm chart and is therefore deployed using the helm cli, so you will need Helm 3 installed. 
 
 The Helm chart is located at https://github.com/trevorvoncannon/angi/tree/main/charts/api-requester - make sure to review the README.md for configuration options in the values file 
 
