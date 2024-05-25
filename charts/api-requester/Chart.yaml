@@ -1,1 +1,5 @@
+apiVersion: v2
+name: api-requester
+description: api-requester helm chart
+version: 1.0.0
 

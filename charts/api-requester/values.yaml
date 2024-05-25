@@ -1,0 +1,19 @@
+global:
+  labels:
+    app: api-requester
+    env: testing
+
+cronJob:
+  schedule: "* * * * *"
+  ttlSecondsAfterFinished: 300
+  env:
+    apiURL: "https://gutendex.com/books"
+
+storageClass:
+  provisioner: "k8s.io/minikube-hostpath"
+
+volume:
+  requests:
+    storage: "5Gi"
+
+  
