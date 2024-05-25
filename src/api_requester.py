@@ -2,8 +2,17 @@ import requests
 from pathlib import Path
 import time
 import sys
+import os
 
-api_url = "https://gutendex.com/books" # API url you are querying
+try:
+  api_url = os.environ['API_URL'] # API url you are querying
+except KeyError:
+  print("API_URL environment variable not set, please set the variable and try again")
+  sys.exit(1)
+except MissingSchema as e:
+   print(e)
+   sys.exit(1)
+
 directory = "./api-data/" # Parent directory you want the data to be place in
 
 def api_request(api_url):
