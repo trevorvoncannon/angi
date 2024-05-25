@@ -30,7 +30,7 @@ The Helm chart is located at https://github.com/trevorvoncannon/angi/tree/main/c
 ```bash
 helm install -f values.yaml api-requester . --namespace angi --create-namespace
 ```
-After running this command, you should see this output
+After running this command, you should see this output:
 
 ```
 NAME: api-requester
@@ -45,13 +45,13 @@ This means your release was successfully deployed!
 
 ### Validation
 
-To confirm that all of the resources are running, you can run the following kubectl command
+To confirm that all of the resources are running, you can run the following kubectl command:
 
 ```bash
 kubectl get all -n angi
 ```
 
-Example output
+Example output:
 
 ```
 NAME                                   READY   STATUS      RESTARTS   AGE
@@ -68,3 +68,28 @@ job.batch/api-requester-job-28611158   1/1           9s         2m59s
 job.batch/api-requester-job-28611159   1/1           9s         119s
 job.batch/api-requester-job-28611160   1/1           17s        59s
 ```
+#### Data Validation
+
+Remember the `pv-inspector` pod I mentioned earlier? This is where it comes into play. Run the following command to exec into the inspector pod and confirm data is being extracted from the API and stored on the volume.
+
+```bash
+kubectl exec -it pvc-inspector -n angi -- ls -l api-data
+```
+
+Example output:
+
+```
+$ kubectl exec -it pvc-inspector -n angi -- ls -l api-data
+total 972
+-rw-r--r--    1 root     root         33550 May 25 19:57 api-data-20240525-195708.json
+-rw-r--r--    1 root     root         33550 May 25 19:58 api-data-20240525-195808.json
+-rw-r--r--    1 root     root         33550 May 25 19:59 api-data-20240525-195908.json
+-rw-r--r--    1 root     root         33550 May 25 20:00 api-data-20240525-200016.json
+-rw-r--r--    1 root     root         33550 May 25 20:01 api-data-20240525-200109.json
+-rw-r--r--    1 root     root         33550 May 25 20:02 api-data-20240525-200210.json
+-rw-r--r--    1 root     root         33550 May 25 20:03 api-data-20240525-200309.json
+-rw-r--r--    1 root     root         33550 May 25 20:04 api-data-20240525-200409.json
+```
+ℹ️ **Notice that the files created by the query are timestamped with the date and time (YYYYMMDD-HHMMSS)**
+
+🥳 That's it! All there is to it!
