@@ -44,3 +44,27 @@ TEST SUITE: None
 This means your release was successfully deployed!
 
 ### Validation
+
+To confirm that all of the resources are running, you can run the following kubectl command
+
+```bash
+kubectl get all -n angi
+```
+
+Example output
+
+```
+NAME                                   READY   STATUS      RESTARTS   AGE
+pod/api-requester-job-28611158-877xt   0/1     Completed   0          2m59s
+pod/api-requester-job-28611159-m9kr5   0/1     Completed   0          119s
+pod/api-requester-job-28611160-cj5kw   0/1     Completed   0          59s
+pod/pvc-inspector                      1/1     Running     0          97s
+
+NAME                              SCHEDULE    SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+cronjob.batch/api-requester-job   * * * * *   False     0        59s             5m21s
+
+NAME                                   COMPLETIONS   DURATION   AGE
+job.batch/api-requester-job-28611158   1/1           9s         2m59s
+job.batch/api-requester-job-28611159   1/1           9s         119s
+job.batch/api-requester-job-28611160   1/1           17s        59s
+```
