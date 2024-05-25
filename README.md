@@ -93,3 +93,11 @@ total 972
 ℹ️ **Notice that the files created by the query are timestamped with the date and time (YYYYMMDD-HHMMSS)**
 
 🥳 That's it! All there is to it!
+
+### Teardown/Removal
+
+Simply run the helm uninstall command to remove the release from your environment.
+
+```bash
+helm uninstall api-requester -n angi
+```
