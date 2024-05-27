@@ -6,6 +6,12 @@ global:
 cronJob:
   schedule: "* * * * *"
   ttlSecondsAfterFinished: 300
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      memory: 128Mi
   env:
     apiURL: "https://gutendex.com/books"
 
