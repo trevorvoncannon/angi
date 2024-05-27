@@ -20,6 +20,12 @@ spec:
           - name: api-requester
             image: tfvoncan/api_requester:latest
             imagePullPolicy: Always
+            resources:
+              requests:
+                memory: {{ .Values.cronJob.resources.requests.memory }}
+                cpu: {{ .Values.cronJob.resources.requests.cpu }}
+              limits:
+                memory: {{ .Values.cronJob.resources.limits.memory }}
             env:
             - name: API_URL
               value: "{{ .Values.cronJob.env.apiURL }}"
