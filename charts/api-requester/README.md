@@ -11,6 +11,9 @@ api-requester helm chart
 | cronJob.env.apiURL | string | `"https://gutendex.com/books"` | API Endpoint you wish to query |
 | cronJob.schedule | string | `"* * * * *"` | Cronjob schedule. https://crontab.guru/ for assistance |
 | cronJob.ttlSecondsAfterFinished | int | `300` | Job cleanup time in seconds after completion |
+| cronJob.resources.requests.cpu | string | `50m` | CPU requests for the job pod |
+| cronJob.resources.requests.memory| string | `128Mi` | Memory requests for the job pod |
+| cronJob.resources.limits.memory| string | `128Mi` | Memory limits for the job pod |
 | global.labels.app | string | `"api-requester"` | App label to be applied to resources |
 | global.labels.env | string | `"testing"` | Environment label to be applied to resources |
 | storageClass.provisioner | string | `"k8s.io/minikube-hostpath"` | Storage class provisioner  |
